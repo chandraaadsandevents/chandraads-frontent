@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import logo from "../assets/Chandraa ads logo.svg"
+import logo from "../assets/Chandraa ads logo.svg";
+
+import { AiFillHome } from "react-icons/ai";
+import { FaInfoCircle } from "react-icons/fa";
+import { MdHomeRepairService, MdContactMail, MdBrandingWatermark } from "react-icons/md";
+import { FaTools } from "react-icons/fa";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
-    { href: "/services", label: "Our Services" },
-    { href: "/ourworks", label: "Our Works" },
-    { href: "/branding", label: "Branding" },
-    { href: "/contact", label: "Contact Us" },
+    { href: "/", label: "Home", icon: <AiFillHome size={18} /> },
+    { href: "/about", label: "About Us", icon: <FaInfoCircle size={18} /> },
+    { href: "/services", label: "Our Services", icon: <MdHomeRepairService size={18} /> },
+    { href: "/ourworks", label: "Our Works", icon: <FaTools size={18} /> },
+    { href: "/branding", label: "Branding", icon: <MdBrandingWatermark size={18} /> },
+    { href: "/contact", label: "Contact Us", icon: <MdContactMail size={18} /> },
   ];
 
   return (
@@ -32,7 +37,7 @@ const Header: React.FC = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <span
-            className={`w-7 h-1 bg-primary rounded transition-all ${
+            className={`w-5 h-1 bg-primary rounded transition-all ${
               isMenuOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
@@ -51,15 +56,18 @@ const Header: React.FC = () => {
         {/* Nav Links */}
         <ul
           className={`fixed lg:static top-0 right-0 bg-white h-screen lg:h-auto w-72 lg:w-auto shadow-2xl lg:shadow-none 
-            p-24 lg:p-0 flex flex-col lg:flex-row gap-8 lg:gap-10 transition-all duration-300 
+            p-10 lg:p-0 flex flex-col lg:flex-row gap-6 lg:gap-10 transition-all duration-300 
             ${isMenuOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}
         >
-          {navLinks.map((link) => (
-            <li key={link.href}>
+          {navLinks.map((link) => (                                                                           
+            <li key={link.href}>                         
               <a
                 href={link.href}
-                className="text-gray-800 font-medium tracking-wide text-lg lg:text-base relative group"
+                className="flex items-center gap-5 whitespace-nowrap text-gray-800 font-medium tracking-wide text-lg lg:text-base relative group"
               >
+                {/* icon */}
+                <span className="text-primary">{link.icon}</span>
+
                 {link.label}
 
                 {/* underline */}
