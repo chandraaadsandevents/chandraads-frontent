@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
                 +91-9994272027
               </a>
             </p>
-            <p>
+            {/* <p>
               (office)Phone:{' '}
               <a 
                 href="tel:04224500414"
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
               >
                 04224500414
               </a>
-            </p>
+            </p> */}
             <p>
               Address: 1st Street, Sivananda Colony, Tatabad, Coimbatore, Tamil Nadu 641012
             </p>

@@ -113,60 +113,74 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setIsSubmitting(true);
-    setStatusMessage('Sending your message...');
+    setStatusMessage("Opening your email app…");
 
-    // Check honeypot
-    if (formData.honeypot) {
-      setStatusMessage('Error: Spam detected');
-      setIsSubmitting(false);
-      return;
-    }
+    let fileAttachment = "";
 
-    try {
-      // Use the built-in FormData for the actual submission
-      const submitData = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value !== null && key !== 'honeypot') {
-          if (key === 'file' && value instanceof File) {
-            submitData.append(key, value);
-          } else if (typeof value === 'string') {
-            submitData.append(key, value);
-          }
-        }
-      });
+    if (formData.file) {
+      const fileType = formData.file.type;
 
-      const response = await fetch('/submit-form', {
-        method: 'POST',
-        body: submitData
-      });
+      if (fileType.startsWith("image/")) {
+        // Convert images to Base64
+        const reader = new FileReader();
+        reader.readAsDataURL(formData.file);
 
-      const result = await response.json();
+        reader.onload = () => {
+          fileAttachment = `\nAttached Image (Base64):\n${reader.result}`;
+          sendMail(fileAttachment);
+        };
 
-      if (result.success) {
-        setStatusMessage('Message sent successfully! We will contact you soon.');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          message: '',
-          file: null,
-          honeypot: ''
-        });
-        if (formRef.current) {
-          formRef.current.reset();
-        }
+        reader.onerror = () => {
+          console.error("File read error:", reader.error);
+          setStatusMessage("Error reading the file.");
+          setIsSubmitting(false);
+        };
+        return; // Wait for FileReader
       } else {
-        setStatusMessage(result.message || 'Error sending message. Please try again.');
+        // For PDF, Word, Excel or others
+        fileAttachment = `\nAttached File: ${formData.file.name}\nPlease attach manually before sending.`;
       }
-    } catch (error) {
-      setStatusMessage('Network error. Please check your connection.');
-      console.error('Submission error:', error);
-    } finally {
-      setIsSubmitting(false);
     }
+
+    sendMail(fileAttachment);
   };
+
+  const sendMail = (fileAttachment: string) => {
+    const subject = `New Contact Form Submission - ${formData.name}`;
+    const body = `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Service: ${formData.service}
+
+Message:
+${formData.message}
+
+${fileAttachment}
+
+Sent from Chandra Ads Website
+  `.trim();
+
+    window.location.href = `mailto:chandraaads1@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    setStatusMessage("Email composer opened! Please send your email.");
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: "",
+      file: null,
+      honeypot: ""
+    });
+    setIsSubmitting(false);
+  };
+
+
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
@@ -360,13 +374,12 @@ const Contact: React.FC = () => {
               {statusMessage && (
                 <div
                   id="formStatus"
-                  className={`status-message mt-4 p-4 rounded-lg text-center ${
-                    statusMessage.includes('successfully') 
-                      ? 'bg-green-100 text-green-700 border border-green-200'
-                      : statusMessage.includes('Error') || statusMessage.includes('error')
+                  className={`status-message mt-4 p-4 rounded-lg text-center ${statusMessage.includes('successfully')
+                    ? 'bg-green-100 text-green-700 border border-green-200'
+                    : statusMessage.includes('Error') || statusMessage.includes('error')
                       ? 'bg-red-100 text-red-700 border border-red-200'
                       : 'bg-blue-100 text-blue-700 border border-blue-200'
-                  }`}
+                    }`}
                 >
                   {statusMessage}
                 </div>
