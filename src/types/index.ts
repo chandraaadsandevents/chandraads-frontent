@@ -84,3 +84,23 @@ export interface FloatingElement {
   animationDelay: string;
   fontSize: string;
 }
+
+export interface AdService {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  pricing: {
+    basic: string;
+    standard: string;
+    premium: string;
+  };
+  image: string;
+  icon: string;
+}
+
+export interface NavItem {
+  label: string;
+  href: string;
+  children?: NavItem[];
+}

@@ -39,17 +39,20 @@ const About: React.FC = () => {
     {
       number: 1,
       title: "Discovery & Strategy",
-      description: "Understanding your brand needs and crafting customized solutions through in-depth research and analysis."
+      description: "Understanding your brand needs and crafting customized solutions through in-depth research and analysis.",
+      features: []
     },
     {
       number: 2,
       title: "Creative Development",
-      description: "Designing compelling campaigns across multiple media formats that resonate with your target audience."
+      description: "Designing compelling campaigns across multiple media formats that resonate with your target audience.",
+      features: []
     },
     {
       number: 3,
       title: "Execution & Delivery",
-      description: "Seamless implementation across chosen advertising channels with precision and attention to detail."
+      description: "Seamless implementation across chosen advertising channels with precision and attention to detail.",
+      features: []
     }
   ];
 
@@ -170,39 +173,39 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="relative py-16 lg:py-24 bg-gray-900 text-white">
-        <div className="absolute inset-0 bg-gray-900 bg-opacity-90"></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 relative inline-block">
-              Our <span className="text-yellow-500">Process</span>
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-yellow-500 rounded"></div>
-            </h2>
-            <p className="text-gray-300 text-lg">How we create advertising magic</p>
-          </div>
+  {/* Process Section */}
+<section className="relative py-16 lg:py-24 bg-gray-900 text-white">
+  <div className="absolute inset-0 bg-gray-900"></div>
+    
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 relative inline-block">
+        Our <span className="text-yellow-500">Process</span>
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-yellow-500 rounded"></div>
+      </h2>
+      <p className="text-gray-300 text-lg">How we create advertising magic</p>
+    </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" ref={processStepsRef}>
-            {processSteps.map((step, index) => (
-              <div
-                key={index}
-                className="process-step bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-20 opacity-0 transform translate-y-8 transition-all duration-700 ease-out hover:bg-red-900 hover:bg-opacity-30 hover:-translate-y-2"
-              >
-                <div className="w-16 h-16 bg-yellow-500 text-gray-900 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 transition-transform duration-500 hover:rotate-360">
-                  {step.number}
-                </div>
-                <h3 className="text-xl font-bold text-yellow-500 mb-4 text-center">
-                  {step.title}
-                </h3>
-                <p className="text-gray-200 text-center leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
-            ))}
+    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" ref={processStepsRef}>
+      {processSteps.map((step, index) => (
+        <div
+          key={index}
+          className="process-step bg-gray-800 rounded-2xl p-8 border border-gray-700 opacity-0 transform translate-y-8 transition-all duration-700 ease-out hover:bg-gray-700 hover:-translate-y-2"
+        >
+          <div className="w-16 h-16 bg-yellow-500 text-gray-900 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 transition-transform duration-500 hover:rotate-360">
+            {step.number}
           </div>
+          <h3 className="text-xl font-bold text-yellow-500 mb-4 text-center">
+            {step.title}
+          </h3>
+          <p className="text-gray-300 text-center leading-relaxed">
+            {step.description}
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Values Section */}
       <section className="py-16 lg:py-24 bg-gray-50">

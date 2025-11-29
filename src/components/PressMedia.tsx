@@ -1,7 +1,6 @@
 import React from "react";
 import { MediaPartner } from "../types";
 
-// IMPORT IMAGES CORRECTLY
 import logo1 from "../assets/logo1.svg";
 import logo2 from "../assets/logo2.svg";
 import logo3 from "../assets/logo3.svg";
@@ -26,37 +25,50 @@ const PressMedia: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-10 bg-white w-full">
+      {/* Section Title */}
+      <div className="text-center mb-16 px-4">
+        <h2 className="text-4xl font-bold mb-4">
+          Press <span className="text-primary">Media</span>
+        </h2>
+        <p className="text-lg text-black max-w-2xl mx-auto">
+          We partner with leading publications to amplify your brand's presence across print media
+        </p>
+      </div>
 
-        <div className="section-title text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            Press <span className="text-primary">Media</span>
-          </h2>
-          <p className="text-lg text-gray max-w-2xl mx-auto">
-            We partner with leading publications to amplify your brand's presence across print media
-          </p>
-        </div>
-
-        <div className="logos-container flex flex-wrap justify-center gap-10 mt-16">
-          {mediaPartners.map((partner) => (
+      {/* Full-Width Auto-Scrolling Logos */}
+      <div className="overflow-hidden w-full">
+        <div className="flex animate-scroll gap-8 w-max">
+          {mediaPartners.concat(mediaPartners).map((partner, idx) => (
             <div
-              key={partner.id}
-              className="logo-item bg-white rounded-xl p-6 flex items-center justify-center shadow-lg transition-all duration-300 hover:-translate-y-3 hover:shadow-xl h-32 w-48"
+              key={idx}
+              className="rounded-full  p-6 flex items-center justify-center w-48 h-48 shadow-lg bg-white flex-shrink-0 mb-2"
             >
               <img
                 src={partner.logo}
                 alt={partner.alt}
-                className="max-h-16 grayscale transition-all duration-300 hover:grayscale-0"
+                className="max-h-16"
               />
             </div>
           ))}
         </div>
-
-        <p className="press-quote text-center text-xl italic text-primary font-medium max-w-2xl mx-auto mt-16 py-5">
-          Partnering with the finest in journalism to deliver your message to the right audience
-        </p>
       </div>
+
+
+      {/* Tailwind CSS Animation */}
+      <style>
+        {`
+          @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+          }
+        `}
+      </style>
     </section>
   );
 };

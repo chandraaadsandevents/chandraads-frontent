@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/Chandraa ads logo.svg';
+import logo from '../assets/chandraa ads logo 111.png';
 
 const Footer: React.FC = () => {
   const socialLinks = [
@@ -121,11 +121,11 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="footer-copyright text-center pt-8 mt-8 border-t border-gray-700 text-gray-400 text-sm">
+      <div className="footer-copyright text-center pt-8 mt-8  border-gray-700 text-gray-400 text-sm">
         <p>&copy; 2025 Chandraaads. All Rights Reserved.</p>
       </div>
 
-      <div className="footer-copyright text-center pt-8 mt-8 border-t border-gray-700 text-gray-400 text-sm">
+      <div className="footer-copyright text-center pt-8 mt-8 border-gray-700 text-gray-400 text-sm">
   <a 
     href="https://mediaweb6.com" 
     target="_blank" 
